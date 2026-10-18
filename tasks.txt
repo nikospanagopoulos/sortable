@@ -1,0 +1,27 @@
+============================
+ CODER 1 — Data & Table Core
+============================
+- Set up index.html shell (table, search input, page size select, basic layout)
+- Fetch hero data from the API using fetch()
+- Parse and flatten hero fields: icon, name, fullName, powerstats, race, gender, height, weight, placeOfBirth, alignment
+- Render heroes into the <table> with correct columns
+- Implement pagination logic (page size: 10, 20 default, 50, 100, All)
+
+============================
+ CODER 2 — Search & Sort
+============================
+- Implement live search filtering by name on every keystroke (no button)
+- Implement field-specific search (target a specific column)
+- Implement custom search operators: include (default), exclude, fuzzy, =, !=, >, <
+- Implement column sorting (ascending by default on "name")
+- Toggle ascending/descending on consecutive clicks
+- Sort numeric strings (e.g. "78 kg") numerically
+- Always sort missing values last regardless of sort direction
+
+============================
+ CODER 3 — UI, Detail View & URL State
+============================
+- Style the app with style.css (villain-themed, clean table, responsive)
+- Implement detail view: clicking a hero row shows full details + large image
+- Sync all state to the URL: search term, field filter, sort column/direction, page, selected hero
+- On page load, read URL params and restore full app state
