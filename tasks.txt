@@ -8,7 +8,7 @@
 - Implement pagination logic (page size: 10, 20 default, 50, 100, All)
 
 ============================
- CODER 2 — Search & Sort
+ CODER 2 — Search & Sort npanagopoul
 ============================
 - Implement live search filtering by name on every keystroke (no button)
 - Implement field-specific search (target a specific column)
