@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Superhero Database</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">CONFIDENTIAL DATABASE</p>
+          <h1>Superhero Records</h1>
+        </div>
+        <label class="search-control" for="search-input">
+          <span>Search by name</span>
+          <input id="search-input" type="search" placeholder="Search heroes…" autocomplete="off">
+        </label>
+      </header>
+
+      <section class="table-section" aria-label="Hero records">
+        <div class="table-toolbar">
+          <p id="result-count" aria-live="polite">Loading hero records…</p>
+          <label for="page-size">
+            Rows per page
+            <select id="page-size" name="page-size">
+              <option value="10">10</option>
+              <option value="20" selected>20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+              <option value="all">All results</option>
+            </select>
+          </label>
+        </div>
+
+        <p id="load-error" role="alert" hidden></p>
+
+        <div class="table-scroll">
+          <table id="hero-table">
+            <thead>
+              <tr>
+                <th scope="col">Icon</th>
+                <th scope="col">Name</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Intelligence</th>
+                <th scope="col">Strength</th>
+                <th scope="col">Speed</th>
+                <th scope="col">Durability</th>
+                <th scope="col">Power</th>
+                <th scope="col">Combat</th>
+                <th scope="col">Race</th>
+                <th scope="col">Gender</th>
+                <th scope="col">Height</th>
+                <th scope="col">Weight</th>
+                <th scope="col">Place of Birth</th>
+                <th scope="col">Alignment</th>
+              </tr>
+            </thead>
+            <tbody id="hero-table-body"></tbody>
+          </table>
+        </div>
+
+        <nav class="pagination" aria-label="Table pagination">
+          <button id="previous-page" type="button" disabled>Previous</button>
+          <span id="page-indicator" aria-live="polite">Page 1 of 1</span>
+          <button id="next-page" type="button" disabled>Next</button>
+        </nav>
+      </section>
+    </main>
+  </body>
+</html>
