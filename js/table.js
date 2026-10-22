@@ -17,6 +17,8 @@
     pageSize: 20,
   };
 
+  const changeListeners = [];
+
   const makeCell = (value) => {
     const cell = document.createElement("td");
     cell.textContent = value || "—";
@@ -83,6 +85,7 @@
     pageIndicator.textContent = `Page ${state.page} of ${totalPages}`;
     previousButton.disabled = state.page <= 1;
     nextButton.disabled = state.page >= totalPages;
+    notifyChange();
   };
 
   // Replaces the list that is shown and goes back to the first page.
@@ -127,6 +130,37 @@
     }
   });
 
+const notifyChange = () => {
+  changeListeners.forEach((listener) => listener());
+};
+
+const onChange = (listener) => {
+  changeListeners.push(listener);
+};
+const getState = () => ({
+  page: state.page,
+  pageSize:
+    state.pageSize === Infinity
+      ? "all"
+      : String(state.pageSize),
+});
+
+const setState = ({ page, pageSize }) => {
+  if (pageSize) {
+    pageSizeSelect.value = pageSize;
+
+    state.pageSize =
+      pageSize === "all"
+        ? Infinity
+        : Number(pageSize);
+  }
+
+  state.page = Number(page) || 1;
+
+  renderPage();
+};
+
   window.heroApp = window.heroApp || {};
-  window.heroApp.table = { setVisibleHeroes, showError };
+  window.heroApp.table = { setVisibleHeroes, showError, getState, setState, onChange };
 })();
+
