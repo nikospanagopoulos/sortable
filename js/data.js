@@ -52,6 +52,7 @@
 
     return {
       id: hero.id,
+      raw: hero,
       icon: asText(hero.images && hero.images.xs),
       name: asText(hero.name),
       fullName: asText(biography.fullName),
