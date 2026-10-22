@@ -1,0 +1,238 @@
+/* Cyber HUD theme */
+
+/* Colors, fonts and sizes live in these variables: change them to restyle the page. */
+:root {
+  --bg:#02070a;
+  --bg-image:linear-gradient(#00ffd011 1px,transparent 1px);
+  --surface:#041016;
+  --text:#bffcf2;
+  --muted:#4aa89c;
+  --accent:#00ffd0;
+  --accent-contrast:#021;
+  --border:#0b3a3a;
+  --head-bg:#062229;
+  --head-text:#00ffd0;
+  --head-border:1px solid #00ffd0;
+  --row-alt:#06151b;
+  --row-hover:#0a2f33;
+  --radius:0;
+  --font:'Courier New',monospace;
+  --h1-case:uppercase;
+  --h1-spacing:.2em;
+  --h1-color:#00ffd0;
+  --cell-pad:5px 7px;
+  --shadow:0 0 0 1px #00ffd055,0 0 30px #00ffd025;
+}
+
+* {
+  box-sizing:border-box;
+}
+
+body {
+  margin:0;
+  min-height:100vh;
+  background:var(--bg);
+  background-image:var(--bg-image,none);
+  color:var(--text);
+  font-family:var(--font);
+  font-size:12.5px;
+}
+
+.app {
+  max-width:1500px;
+  margin:0 auto;
+  padding:22px 14px;
+}
+
+.app-header {
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+
+.eyebrow {
+  margin:0 0 6px;
+  font-size:11px;
+  letter-spacing:.24em;
+  color:var(--accent);
+  font-weight:700;
+}
+
+h1 {
+  margin:0;
+  font-family:var(--heading-font,var(--font));
+  font-size:var(--h1-size,32px);
+  letter-spacing:var(--h1-spacing,0);
+  text-transform:var(--h1-case,none);
+  color:var(--h1-color,var(--text));
+}
+
+.search-control {
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  font-size:11px;
+  color:var(--label-color,var(--muted));
+  text-transform:uppercase;
+  letter-spacing:.1em;
+}
+
+#search-input,#page-size {
+  background:var(--input-bg,var(--surface));
+  color:var(--text);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:8px 11px;
+  font:inherit;
+}
+
+#search-input {
+  width:270px;
+  font-size:14px;
+}
+
+#search-input:focus,#page-size:focus {
+  outline:2px solid var(--accent);
+  outline-offset:1px;
+}
+
+.table-section {
+  background:var(--surface);
+  border:var(--section-border,1px solid var(--border));
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+
+.table-toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 14px;
+  border-bottom:1px solid var(--border);
+  color:var(--muted);
+}
+
+.table-toolbar p {
+  margin:0;
+}
+
+.table-toolbar label {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.table-scroll {
+  overflow-x:auto;
+}
+
+#load-error {
+  margin:0;
+  padding:10px 14px;
+  background:#7f1d1d;
+  color:#fff;
+}
+
+table {
+  width:100%;
+  border-collapse:collapse;
+}
+
+th,td {
+  padding:var(--cell-pad,6px 8px);
+  text-align:left;
+  white-space:nowrap;
+}
+
+thead th {
+  background:var(--head-bg);
+  color:var(--head-text);
+  cursor:pointer;
+  user-select:none;
+  font-size:10.5px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  border-bottom:var(--head-border,0);
+}
+
+thead th:hover {
+  filter:brightness(1.15);
+}
+
+th[aria-sort=ascending]::after {
+  content:" ▲";
+  color:var(--accent);
+}
+
+th[aria-sort=descending]::after {
+  content:" ▼";
+  color:var(--accent);
+}
+
+tbody tr:nth-child(even) {
+  background:var(--row-alt);
+}
+
+tbody tr:hover {
+  background:var(--row-hover);
+}
+
+td {
+  border-bottom:1px solid var(--border);
+}
+
+td:nth-child(2) {
+  font-weight:700;
+  color:var(--name-color,var(--text));
+}
+
+td img {
+  width:34px;
+  height:var(--img-h,34px);
+  border-radius:var(--img-radius,50%);
+  object-fit:cover;
+  display:block;
+  border:var(--img-border,0);
+}
+
+.pagination {
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:14px;
+  padding:12px;
+  border-top:1px solid var(--border);
+  color:var(--muted);
+}
+
+.pagination button {
+  background:var(--accent);
+  color:var(--accent-contrast);
+  border:0;
+  border-radius:var(--radius);
+  padding:7px 18px;
+  font:inherit;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.pagination button:disabled {
+  opacity:.35;
+  cursor:not-allowed;
+}
+
+@media(max-width:700px) {
+  #search-input {
+    width:100%;
+  }
+  .search-control {
+    width:100%;
+  }
+  h1 {
+    font-size:24px;
+  }
+}
