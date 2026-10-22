@@ -27,6 +27,7 @@
   const sortState = { key: "name", direction: "asc" };
   let searchQuery = "";
   let allHeroes = [];
+  const changeListeners = [];
 
   // Returns the value used to compare a hero on a column: a number, a lowercase string, or null when missing.
   function getSortValue(hero, key) {
@@ -99,6 +100,29 @@
     const filtered = filterHeroes(allHeroes, searchQuery);
     const sorted = sortHeroes(filtered, sortState.key, sortState.direction);
     window.heroApp.table.setVisibleHeroes(sorted);
+    changeListeners.forEach((listener) => listener());
+  }
+
+  // Returns the current search text and sort, so other modules (like the URL) can save them.
+  function getState() {
+    return { query: searchQuery, key: sortState.key, direction: sortState.direction };
+  }
+
+  // Restores a saved search and sort; an unknown column is ignored.
+  function setState({ query, key, direction }) {
+    if (COLUMN_KEYS.includes(key)) {
+      sortState.key = key;
+      sortState.direction = direction === "desc" ? "desc" : "asc";
+    }
+    searchQuery = query ?? "";
+    searchInput.value = searchQuery;
+    updateSortIndicators();
+    updateView();
+  }
+
+  // Calls the listener every time the shown list changes.
+  function onChange(listener) {
+    changeListeners.push(listener);
   }
 
   function handleSearchInput(event) {
@@ -132,5 +156,14 @@
 
   window.heroApp = window.heroApp || {};
   // The other functions are exposed for testing in the console.
-  window.heroApp.searchSort = { init, getSortValue, compareValues, sortHeroes, filterHeroes };
+  window.heroApp.searchSort = {
+    init,
+    getState,
+    setState,
+    onChange,
+    getSortValue,
+    compareValues,
+    sortHeroes,
+    filterHeroes,
+  };
 })();

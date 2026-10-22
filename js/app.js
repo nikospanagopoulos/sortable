@@ -1,13 +1,14 @@
 (() => {
   "use strict";
 
-  const { data, table, searchSort, detail } = window.heroApp;
+  const { data, table, searchSort, detail, urlState } = window.heroApp;
 
-  // Loads the heroes first, then starts search and sort; a failed load is shown in the page.
+  // Loads the heroes first, then starts search, sort, the detail view and the URL state; a failed load is shown in the page.
   data.loadHeroes().then(
     (heroes) => {
-       searchSort.init(heroes);
-       detail.init(heroes);
+      searchSort.init(heroes);
+      detail.init(heroes);
+      urlState.init();
     },
     (error) =>
       table.showError(

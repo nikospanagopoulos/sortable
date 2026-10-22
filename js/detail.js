@@ -6,7 +6,9 @@
   const dialog = document.querySelector("#hero-dialog");
   const tableBody = document.querySelector("#hero-table-body");
 
+  const changeListeners = [];
   let heroesById = new Map();
+  let openId = null;
 
   // Turns a key like "placeOfBirth" into a readable label: "Place of birth".
   function makeLabel(key) {
@@ -79,10 +81,32 @@
 
     dialog.replaceChildren(makeContent(hero.raw));
     if (!dialog.open) dialog.showModal();
+
+    openId = hero.id;
+    notifyChange();
   }
 
   function close() {
     if (dialog.open) dialog.close();
+  }
+
+  function getOpenId() {
+    return openId;
+  }
+
+  // Calls the listener when a hero is opened or the dialog is closed.
+  function onChange(listener) {
+    changeListeners.push(listener);
+  }
+
+  function notifyChange() {
+    changeListeners.forEach((listener) => listener());
+  }
+
+  // Runs for the close button, the Esc key and a backdrop click alike.
+  function handleDialogClose() {
+    openId = null;
+    notifyChange();
   }
 
   function handleRowClick(event) {
@@ -99,8 +123,9 @@
     heroesById = new Map(heroes.map((hero) => [hero.id, hero]));
     tableBody.addEventListener("click", handleRowClick);
     dialog.addEventListener("click", handleDialogClick);
+    dialog.addEventListener("close", handleDialogClose);
   }
 
   window.heroApp = window.heroApp || {};
-  window.heroApp.detail = { init, open, close };
+  window.heroApp.detail = { init, open, close, getOpenId, onChange };
 })();
