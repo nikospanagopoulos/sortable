@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const { searchSort, detail } = window.heroApp;
+  const { searchSort, detail, table } = window.heroApp;
 
   const DEFAULT_KEY = "name";
   const DEFAULT_DIRECTION = "asc";
@@ -15,12 +15,18 @@
       key: params.get("sort") ?? DEFAULT_KEY,
       direction: params.get("dir") ?? DEFAULT_DIRECTION,
     });
+    
+     table.setState({
+     page: params.get("page") ?? 1,
+     pageSize: params.get("size") ?? "20",
+    });
     if (params.has("hero")) detail.open(params.get("hero"));
   }
 
   // Writes the current state to the address bar; default values are left out to keep the URL short.
   function saveToUrl() {
     const { query, key, direction } = searchSort.getState();
+    const { page, pageSize } = table.getState();
     const openId = detail.getOpenId();
     const params = new URLSearchParams();
 
@@ -31,6 +37,14 @@
     }
     if (openId !== null) params.set("hero", openId);
 
+    if (page > 1) {
+      params.set("page", page);
+    }
+
+    if (pageSize !== "20") {
+      params.set("size", pageSize);
+    }
+
     const queryString = params.toString();
     const url = queryString === "" ? window.location.pathname : `?${queryString}`;
     window.history.replaceState(null, "", url);
@@ -40,6 +54,7 @@
     restoreFromUrl();
     searchSort.onChange(saveToUrl);
     detail.onChange(saveToUrl);
+    table.onChange(saveToUrl);
   }
 
   window.heroApp = window.heroApp || {};
