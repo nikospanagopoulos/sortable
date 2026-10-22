@@ -38,7 +38,7 @@ Data source:
   (`race:human`, `race:!human`, `strength:>80`, `weight:<1000` — see below)
 - **Pagination**: 10, 20 (default), 50, 100 or all results per page
 - **Detail view**: click any hero to see the large image and all details
-- **URL state**: search, sort and open hero are stored in the address bar
+- **URL state**: search, sort, page, page size and open hero are stored in the address bar
 - Dark "cyber HUD" theme; the table scrolls sideways on narrow screens
 - Vanilla JavaScript only
 
@@ -118,9 +118,10 @@ The address bar always describes the current view:
 | `sort` | sorted column (default `name`) |
 | `dir` | `asc` or `desc` (default `asc`) |
 | `hero` | id of the open hero |
+| `page` | current page (default `1`) |
+| `size` | rows per page: `10`, `20` (default), `50`, `100` or `all` |
 
-Default values are left out, so the URL of a fresh page is clean. Copy the
-URL into another tab and the same table, sort and hero appear. Unknown
+Default values are left out, so the URL of a fresh page is clean. Copy theURL into another tab and the same table, sort and hero appear. Unknown
 values in the URL are ignored. The page number is not stored.
 
 ---
