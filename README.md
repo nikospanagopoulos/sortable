@@ -56,7 +56,7 @@ Data source:
 ## Installation & Usage
 
 ```bash
-git clone <repository-url>
+git clone https://platform.zone01.gr/git/spetridou/sortable
 cd sortable
 
 python3 -m http.server 8080
